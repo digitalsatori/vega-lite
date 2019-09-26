@@ -1,9 +1,8 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [published]
 
 jobs:
   release:
@@ -34,9 +33,6 @@ jobs:
           popd
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Deploy check
-        run: ./scripts/pre-deploy.sh
 
       - name: Publish to NPM registry
         run: ./scripts/deploy-npm.sh
